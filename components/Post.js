@@ -25,12 +25,32 @@ function Post({ id, username, userImg, img, caption }) {
       {/* img */}
       <img className="object-cover w-full" src={img} alt="" />
       {/* buttons */}
+      <div className="flex p-3 justify-between">
+        <div className="flex space-x-4 ">
+          <HeartIcon className="btn" />
+          <ChatIcon className="btn" />
+          <PaperAirplaneIcon className="btn rotate-45 h-9" />
+        </div>
+        <BookmarkIcon className="btn" />
+      </div>
 
       {/* caption */}
-
+      <p className="p-5 truncate">
+        <span className="font-bold mr-2">{username}</span>
+        {caption}
+      </p>
       {/* comments */}
 
       {/* input box */}
+      <form className="flex p-3 border-t-2">
+        <EmojiHappyIcon className="btn " />
+        <input
+          className="border-none flex-1 focus:ring-0 outline-none"
+          type="text"
+          placeholder="Add a comment..."
+        />
+        <button className="font-semibold text-blue-400">Post</button>
+      </form>
     </div>
   );
 }
