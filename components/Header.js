@@ -8,20 +8,32 @@ import {
   MenuIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Header() {
+  const { data: session } = useSession();
+  console.log(session);
+  const router = useRouter();
+
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between max-w-6xl mx-5 xl:mx-auto ">
         {/* left */}
-        <div className="relative hidden lg:inline-grid h-19 w-24 cursor-pointer">
+        <div
+          onClick={() => router.push("/")}
+          className="relative hidden lg:inline-grid h-19 w-24 cursor-pointer"
+        >
           <Image
             src="https://links.papareact.com/ocw"
             objectFit="contain"
             layout="fill"
           />
         </div>
-        <div className="relative mt-3 lg:hidden h-10 w-10 flex-shrink-0 cursor-pointer">
+        <div
+          onClick={() => router.push("/")}
+          className="relative mt-3 lg:hidden h-10 w-10 flex-shrink-0 cursor-pointer"
+        >
           <Image
             src="https://links.papareact.com/jjm"
             objectFit="contain"
@@ -44,22 +56,30 @@ function Header() {
         </div>
         {/* right  */}
         <div className="flex items-center space-x-4 justify-end">
-          <HomeIcon className="navBtn" />
+          <HomeIcon onClick={() => router.push("/")} className="navBtn" />
           <MenuIcon className="h-8 md:hidden cursor-pointer" />
-          <div className="relative navBtn">
-            <PaperAirplaneIcon className="navBtn rotate-45 h-6" />
-            <div className="absolute -top-2 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          <img
-            className="h-10 rounded-full"
-            alt="pooyan"
-            src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-          />
+
+          {session ? (
+            <>
+              <div className="relative navBtn">
+                <PaperAirplaneIcon className="navBtn rotate-45 h-6" />
+                <div className="absolute -top-2 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              <img
+                onClick={signOut}
+                className="h-10 rounded-full"
+                alt={session.user.name}
+                src={session?.user?.image}
+              />
+            </>
+          ) : (
+            <button onClick={signIn}>Sign In</button>
+          )}
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ const post = [
     id: "123",
     username: "ali",
     userImg: "https://links.papareact.com/3ke",
-    img: "https://links.papareact.com/3ke",
+    img: "https://links.papareact.com/4cj",
     caption: "lets goooo baby",
   },
   {
