@@ -78,7 +78,7 @@ function Header() {
               <HeartIcon className="navBtn" />
               <img
                 onClick={signOut}
-                className="h-10 rounded-full"
+                className="h-10 rounded-full cursor-pointer hover:scale-105"
                 alt={session.user.name}
                 src={session?.user?.image}
               />
